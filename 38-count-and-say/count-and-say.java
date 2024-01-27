@@ -1,23 +1,32 @@
 class Solution {
     public String countAndSay(int n) {
-        return util1(n);
-    }
-    public String util1(int n) {
-        if (n == 1) {
-            return "1";
+        String s="1";
+        for(int i=2;i<=n;i++){
+          s=countAndAdd(s);
         }
-        String prev = util1(n - 1);
-        String ans = "";
-        int freq = 1;
-        for (int i = 0; i < prev.length(); i++) {
-            if (i == prev.length() - 1 || prev.charAt(i) != prev.charAt(i + 1)) {
-                ans += freq;
-                ans += prev.charAt(i);
-                freq = 1;
-            } else {
-                freq++;
+        return s;
+        
+    }
+    public String countAndAdd(String s)
+    {
+        StringBuilder str=new StringBuilder();
+        char c=s.charAt(0);
+       int count=1;
+
+        for(int i=1;i<s.length();i++)
+        {
+            if(s.charAt(i)==c) count++;
+
+            else{
+                str.append(count);
+                str.append(c);
+                c=s.charAt(i);
+                count=1;
             }
         }
-        return ans;
+        str.append(count);
+        str.append(c);
+     
+        return str.toString();
     }
 }
