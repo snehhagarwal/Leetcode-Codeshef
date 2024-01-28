@@ -1,8 +1,7 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> d=new ArrayList<>();
-        print(0,candidates,target,d,ans);
+        print(0,candidates,target,new ArrayList<>(),ans);
         return ans;
     }
     public void print(int index,int[] candidates,int target,List<Integer> d,List<List<Integer>> ans){
@@ -16,6 +15,6 @@ class Solution {
             print(index,candidates,target-candidates[index],d,ans);
             d.remove(d.size() - 1);
         }
-        print(index+1,candidates,target,new ArrayList<>(d),ans);
+        print(index+1,candidates,target,d,ans);
     }
 }
