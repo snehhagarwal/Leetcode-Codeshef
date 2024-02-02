@@ -1,33 +1,27 @@
 class Solution {
     public int smallestDistancePair(int[] nums, int k) {
         Arrays.sort(nums);
-        int left = 0, right = nums[nums.length - 1] - nums[0];
-        while (left < right) {
-            int mid = (left + right) >> 1;
-            if (count(mid, nums) >= k) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+        int left=0;
+        int right = nums[nums.length-1]-nums[0];
+        while(left<right)
+        {
+            int mid=(left+right)/2;
+            if(issmallpairs(nums,k,mid))
+                right=mid;
+            else
+                left=mid+1;
         }
         return left;
     }
-
-    private int count(int dist, int[] nums) {
-        int cnt = 0;
-        for (int i = 0; i < nums.length; ++i) {
-            int left = 0, right = i;
-            while (left < right) {
-                int mid = (left + right) >> 1;
-                int target = nums[i] - dist;
-                if (nums[mid] >= target) {
-                    right = mid;
-                } else {
-                    left = mid + 1;
-                }
-            }
-            cnt += i - left;
+    
+    private boolean issmallpairs(int[] nums,int k,int mid)
+    {
+        int count=0, left=0;
+        for(int right=1;right<nums.length;right++)
+        {
+            while(nums[right]-nums[left]>mid) left++;
+            count+=right-left;
         }
-        return cnt;
+        return (count>=k);
     }
 }
