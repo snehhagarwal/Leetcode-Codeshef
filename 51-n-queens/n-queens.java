@@ -1,78 +1,83 @@
 import java.util.*;
 class Solution {
     public static List < List < String >> solveNQueens(int n) {
-            char[][] board = new char[n][n];
-                    for (int i = 0; i < n; i++)
-                                for (int j = 0; j < n; j++)
-                                                board[i][j] = '.';
-                                                        List < List < String >> res = new ArrayList < List < String >> ();
-                                                                dfs(0, board, res);
-                                                                        return res;
-                                                                            }
+        List<List<String>> result=new ArrayList<>();
+        char[][] list=new char[n][n];
+        print(list,result,0);
+        return result;
+    }
+    public static void print(char[][] list,List<List<String>> result,int col){
+        if(col==list.length){
+            addrow(list,result);
+            return;
+        }
+        for(int row=0;row<list.length;row++){
+            if(issafe(row,col,list)){
+                list[row][col]='Q';
+                print(list,result,col+1);
+                list[row][col]='.';
+            }
+        }
+    }
+    public static boolean issafe(int row,int col,char[][] list){
+        //horizontal
+        for(int i=0;i<list.length;i++){
+            if(list[row][i]=='Q'){
+                return false;
+            }
+        }
+        //vertical
+        for(int i=0;i<list[0].length;i++){
+            if(list[i][col]=='Q'){
+                return false;
+            }        
+        }
+        //upper left
+        int r=row;
+        for(int c=col;c>=0 && r>=0;r--,c--){
+            if(list[r][c]=='Q'){
+                return false;
+            }
+        }
+        //upper right
+        r=row;
+        for(int c=col;c<list.length && r>=0;c++,r--){
+               if(list[r][c]=='Q'){
+                   return false;
+               }
+        }
+        //down right
+        r=row;
+        for(int c=col;c<list.length && r<list[0].length;r++,c++){
+            if(list[r][c]=='Q'){
+                return false;
+            }
+        }
+        //down left
+        r=row;
+        for(int c=col;c>=0 && r<list.length;r++,c--){
+            if(list[r][c]=='Q'){
+                return false;
+            }
+        }
+        return true;
+        }
 
-                                                                                static boolean validate(char[][] board, int row, int col) {
-                                                                                        int duprow = row;
-                                                                                                int dupcol = col;
-                                                                                                        while (row >= 0 && col >= 0) {
-                                                                                                                    if (board[row][col] == 'Q') return false;
-                                                                                                                                row--;
-                                                                                                                                            col--;
-                                                                                                                                                    }
-
-                                                                                                                                                            row = duprow;
-                                                                                                                                                                    col = dupcol;
-                                                                                                                                                                            while (col >= 0) {
-                                                                                                                                                                                        if (board[row][col] == 'Q') return false;
-                                                                                                                                                                                                    col--;
-                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                    row = duprow;
-                                                                                                                                                                                                                            col = dupcol;
-                                                                                                                                                                                                                                    while (col >= 0 && row < board.length) {
-                                                                                                                                                                                                                                                if (board[row][col] == 'Q') return false;
-                                                                                                                                                                                                                                                            col--;
-                                                                                                                                                                                                                                                                        row++;
-                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                        return true;
-                                                                                                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                                                                                                static void dfs(int col, char[][] board, List < List < String >> res) {
-                                                                                                                                                                                                                                                                                                        if (col == board.length) {
-                                                                                                                                                                                                                                                                                                                    res.add(construct(board));
-                                                                                                                                                                                                                                                                                                                                return;
-                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                                for (int row = 0; row < board.length; row++) {
-                                                                                                                                                                                                                                                                                                                                                            if (validate(board, row, col)) {
-                                                                                                                                                                                                                                                                                                                                                                            board[row][col] = 'Q';
-                                                                                                                                                                                                                                                                                                                                                                                            dfs(col + 1, board, res);
-                                                                                                                                                                                                                                                                                                                                                                                                            board[row][col] = '.';
-                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                        static List < String > construct(char[][] board) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                List < String > res = new LinkedList < String > ();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        for (int i = 0; i < board.length; i++) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    String s = new String(board[i]);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                res.add(s);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return res;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        public static void main(String args[]) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                int N = 4;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        List < List < String >> queen = solveNQueens(N);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                int i = 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        for (List < String > it: queen) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    System.out.println("Arrangement " + i);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                for (String s: it) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                System.out.println(s);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        System.out.println();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    i += 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+        public static void addrow(char[][] list,List<List<String>> result){
+            String row="";
+            List<String> filledrow=new ArrayList<>();
+            for(int i=0;i<list.length;i++){
+                row="";
+                for(int j=0;j<list[0].length;j++){
+                    if(list[i][j]=='Q'){
+                        row+="Q";
+                    }
+                    else{
+                        row+=".";
+                    }
+                }
+                filledrow.add(row);
+            }
+            result.add(filledrow);
+        }
+    }
