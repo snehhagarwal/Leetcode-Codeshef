@@ -6,13 +6,13 @@ class Solution {
         return ac;
     }
     public static void print(int start,List<List<Integer>> ac,List<Integer> list,int n,int k){
-        if(k==list.size()){
+        if(k==0){
             ac.add(new ArrayList<>(list));
             return;
         }
-        for(int i=start;i<=n;i++){
+        for(int i=start;i<=n-k+1;i++){
             list.add(i);
-            print(i+1,ac,list,n,k);
+            print(i+1,ac,list,n,k-1);
             list.remove(list.size()-1);
         }
     }
