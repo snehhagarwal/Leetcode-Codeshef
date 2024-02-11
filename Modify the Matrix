@@ -1,0 +1,22 @@
+/* Given a 0-indexed m x n integer matrix matrix, create a new 0-indexed matrix called answer. Make answer equal to matrix, then replace each element with the value -1 with the maximum element in its respective column.
+Return the matrix answer. */
+Code-->
+class Solution {
+    public int[][] modifiedMatrix(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[i].length;j++){
+                if(matrix[i][j]==-1){
+                    matrix[i][j]=highvalue(j,matrix);
+            }
+        }
+    }
+        return matrix;
+    }
+      public static int highvalue(int col,int[][] matrix){
+        int high=Integer.MIN_VALUE;
+        for(int i=0;i<matrix.length;i++){
+                high=Math.max(high,matrix[i][col]);
+        }
+            return high;
+      }    
+}
