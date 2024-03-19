@@ -10,11 +10,10 @@ class Solution {
                     ans+=0;
                     break;
                 }
-                else{
-                    ans+=happiness[i]-count;
-                    count++;
-                    k--;
-                }
+                else
+                ans+=happiness[i]-count;
+                count++;
+                k--;
             }
         }
         return ans;
