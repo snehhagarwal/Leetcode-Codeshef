@@ -8,15 +8,26 @@ class Solution {
         map.put('C',100);
         map.put('D',500);
         map.put('M',1000);
-        int result=map.get(s.charAt(s.length()-1));
-        for(int i=s.length()-2;i>=0;i--){
-            if(map.get(s.charAt(i))<map.get(s.charAt(i+1))){
-                result-=map.get(s.charAt(i));
-            }
-            else{
-                result+=map.get(s.charAt(i));
+        // int result=map.get(s.charAt(s.length()-1));
+        // for(int i=s.length()-2;i>=0;i--){
+        //     if(map.get(s.charAt(i))<map.get(s.charAt(i+1))){
+        //         result-=map.get(s.charAt(i));
+        //     }
+        //     else{
+        //         result+=map.get(s.charAt(i));
+        //     }
+        // }
+        // return result;
+        int ans=0;
+        int i=0;
+        for(i=0;i<s.length()-1;i++){
+            if(map.get(s.charAt(i))>=map.get(s.charAt(i+1))){
+                ans+=map.get(s.charAt(i));
+            }else{
+                ans-=map.get(s.charAt(i));
             }
         }
-        return result;
+        ans+=map.get(s.charAt(i));
+        return ans;
     }
 }
