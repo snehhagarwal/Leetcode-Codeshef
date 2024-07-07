@@ -28,9 +28,7 @@ class Solution {
                       }
                       i++;
                 }
-            if(map.size()<=2){
-                 max=Math.max(max,j-i+1);
-            }
+            max=Math.max(max,j-i+1);
             j++;
         }
         return max;
