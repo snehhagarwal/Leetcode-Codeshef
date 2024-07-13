@@ -19,11 +19,21 @@ class Solution {
             return 0;
         }
         int cnt=0;
+        boolean bp=false;
         while(temp!=null){
-            if(set.contains(temp.val) && (temp.next==null || !set.contains(temp.next.val))){
-                cnt++;
+            if(set.contains(temp.val)){
+                if(!bp){
+                    cnt++;
+                    bp=true;
+                }
             }
+                else{
+                    bp=false;
+                }          
             temp=temp.next;
+            // if(set.contains(temp.val) && (temp.next==null || !set.contains(temp.next.val))){
+            //     cnt++;
+            // }
         }
         return cnt;
     }
