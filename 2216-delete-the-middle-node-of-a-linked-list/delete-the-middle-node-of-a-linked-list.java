@@ -19,9 +19,7 @@ class Solution {
             slow=slow.next;
             fast=fast.next.next;
         }
-        ListNode front=slow.next;
-        slow.next=front.next;
-        front.next=null;
+        slow.next=slow.next.next;
         return head;
     }
 }
