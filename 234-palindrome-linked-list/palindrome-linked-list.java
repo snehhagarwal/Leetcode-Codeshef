@@ -11,8 +11,8 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
         ListNode slow=head;
-        ListNode fast=head;
-        while(fast.next!=null && fast.next.next!=null){
+        ListNode fast=head.next;
+        while(fast!=null && fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
         }
@@ -20,6 +20,7 @@ class Solution {
         ListNode curr=head;
         while(newhead!=null){
             if(newhead.val!=curr.val){
+                reverse(newhead);
                 return false;
             }
             newhead=newhead.next;
