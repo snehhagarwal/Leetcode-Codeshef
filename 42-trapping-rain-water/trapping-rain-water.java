@@ -6,7 +6,7 @@ class Solution {
         int lmax=0;
         int rmax=0;
         while(l<=r){
-            if(lmax<=rmax){
+            if(height[l]<=height[r]){
                 if(height[l]<lmax){
                     rain+=lmax-height[l];
                 }else{
