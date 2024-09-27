@@ -20,15 +20,15 @@ class Solution {
         }
         return func(root.left,root.right);
     }
-    public static boolean func(TreeNode p,TreeNode q){
-        if(p==null && q==null){
+    public static boolean func(TreeNode l,TreeNode r){
+        if(l==null && r==null){
             return true;
         }
-        if(p==null || q==null || p.val!=q.val){
+        if(l==null || r==null || l.val!=r.val){
             return false;
         }
-        boolean a=func(p.left,q.right);
-        boolean b=func(p.right,q.left);
+        boolean a=func(l.left,r.right);
+        boolean b=func(l.right,r.left);
         return a&&b;
     }
 }
